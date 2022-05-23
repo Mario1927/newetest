@@ -25,7 +25,7 @@ const MenuProps = {
 
 function Filter (props: IFilter) {
   const dispatch = useDispatch()
-  const { typeName, setTypeName } = props
+  const { typeName, setTypeName, setPage } = props
 
   async function getTypes () {
     try {
@@ -44,9 +44,10 @@ function Filter (props: IFilter) {
     setTypeName(
       value
     )
+    setPage(1)
   }
 
-  useEffect(() => { getTypes() }, [dispatch])
+  useEffect(() => { getTypes() }, [])
   const names = useSelector((state: RootState) => state.pokemons.types)
 
   return (

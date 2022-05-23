@@ -56,14 +56,13 @@ function Home () {
 
   const indexLastPokemon = currentPage * 10
   const indexFirstPokemon = indexLastPokemon - 10
-  const statePokemon = useSelector((state: RootState) => state.pokemons.pokemons)
-  let pokemons = typeName === 'All' ? statePokemon : statePokemon.filter((pokemon) => pokemon.types.some((type) => type.type.name === typeName.toLowerCase()))
+  let pokemons = typeName === 'All' ? useSelector((state: RootState) => state.pokemons.pokemons) : useSelector((state: RootState) => state.pokemons.pokemons.filter((pokemon) => pokemon.types.some((type) => type.type.name.toLowerCase() === typeName.toLowerCase())))
   const totalPokemons = pokemons.length
   pokemons = pokemons.slice(indexFirstPokemon, indexLastPokemon)
 
   return (
     <Container sx={{ width: '100vw', display: 'flex', flexDirection: 'column', margin: 'auto', justifyContent: 'center', alignItems: 'center' }}>
-      <Filter setTypeName={setTypeName} typeName={typeName}/>
+      <Filter setTypeName={setTypeName} typeName={typeName} setPage={setCurrentPage}/>
       <Button size='small' color='primary' variant='contained' onClick={getPokemons} sx={{ marginY: '15px' }}>
         GET POKEMONS
       </Button>
