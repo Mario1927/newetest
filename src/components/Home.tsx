@@ -4,7 +4,6 @@ import { setPokemons } from '../redux/pokemonSlice'
 import { RootState } from '../redux/store'
 import axios from 'axios'
 import { Avatar, Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Container, Grid, Typography } from '@mui/material'
-// import GreenCardBackground from '../assets/Green_Card_Background.jpg'
 import Pagination from './Pagination'
 import { headerColors } from '../assets/colors/colors'
 import Filter from './Filter'
@@ -56,7 +55,7 @@ function Home () {
 
   const indexLastPokemon = currentPage * 10
   const indexFirstPokemon = indexLastPokemon - 10
-  let pokemons = typeName === 'All' ? useSelector((state: RootState) => state.pokemons.pokemons) : useSelector((state: RootState) => state.pokemons.pokemons.filter((pokemon) => pokemon.types.some((type) => type.type.name.toLowerCase() === typeName.toLowerCase())))
+  let pokemons = useSelector((state: RootState) => state.pokemons.displayedPokemons)
   const totalPokemons = pokemons.length
   pokemons = pokemons.slice(indexFirstPokemon, indexLastPokemon)
 

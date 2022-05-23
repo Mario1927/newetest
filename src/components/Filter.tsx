@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { setTypes } from '../redux/pokemonSlice'
+import { setTypes, filterPokemons } from '../redux/pokemonSlice'
 import { RootState } from '../redux/store'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputLabel from '@mui/material/InputLabel'
@@ -45,6 +45,7 @@ function Filter (props: IFilter) {
       value
     )
     setPage(1)
+    dispatch(filterPokemons(value))
   }
 
   useEffect(() => { getTypes() }, [])
