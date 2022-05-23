@@ -9,17 +9,9 @@ function NavBar () {
         <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
             <img src={Logo} alt="logo" style={{ width: '50px', height: '50px' }} />
         </Container>
-
-        <Container>
-            <Typography>
-                NEWE TEST
-            </Typography>
+        <Container sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Typography>NEWE TEST</Typography>
         </Container>
-
-        {/* <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-            <Input sx={{ backgroundColor: 'white', borderRadius: '0.25rem', width: '250px' }}/>
-            <Button sx={{ marginLeft: '5px' }}>SEARCH</Button>
-        </Container> */}
     </Box>
   )
 }
