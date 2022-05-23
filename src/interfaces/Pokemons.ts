@@ -59,6 +59,7 @@ interface IPokemons {
     base_experience: number;
     forms: IForms[];
     height: number;
+    weight: number;
     id: number;
     is_default: boolean;
     moves: IMoves[];

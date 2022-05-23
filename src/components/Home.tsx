@@ -8,12 +8,17 @@ import { Avatar, Box, Button, Card, CardActionArea, CardActions, CardContent, Ca
 import Pagination from './Pagination'
 import { headerColors } from '../assets/colors/colors'
 import Filter from './Filter'
+import Detail from './Detail'
+import IPokemons from '../interfaces/Pokemons'
 
 function Home () {
   const dispatch = useDispatch()
   const [offset, setOffset] = useState(10)
   const [currentPage, setCurrentPage] = useState(0)
   const [typeName, setTypeName] = useState('All')
+  const [open, setOpen] = React.useState(false)
+  const handleClose = () => setOpen(false)
+  const [pokemon, setPokemon] = useState({})
 
   async function getPokemons () {
     try {
@@ -44,6 +49,11 @@ function Home () {
     }
   }
 
+  function handleOpen (pokemon: IPokemons) {
+    setPokemon(pokemon)
+    setOpen(true)
+  }
+
   const indexLastPokemon = currentPage * 10
   const indexFirstPokemon = indexLastPokemon - 10
   const statePokemon = useSelector((state: RootState) => state.pokemons.pokemons)
@@ -61,10 +71,10 @@ function Home () {
         {pokemons.length
           ? pokemons.map((pokemon) => (
           <Card sx={{ width: 345, height: '265px', margin: '10px' }} key={`Card ${pokemon.id}`}>
-            <CardActionArea sx={{ height: '230px' }}>
+            <CardActionArea sx={{ height: '230px' }} onClick={() => handleOpen(pokemon)}>
               <CardMedia sx={{ backgroundColor: headerColors[`${pokemon.types[0].type.name}`], height: '70px', width: '100%', padding: '0', display: 'flex', justifyContent: 'center' }}>
                 <img src={`icons/${pokemon.types[0].type.name}.png`} alt={`${pokemon.types[0].type.name}`} style={{ height: '20px', width: '20px', position: 'relative', top: '25px', right: '75px' }} />
-                <Avatar src={pokemon.sprites.front_default} alt="green iguana" sx={{ width: '125px', height: '125px', position: 'relative', top: '-20px' }}/>
+                <Avatar src={pokemon.sprites.front_default} alt="green iguana" sx={{ width: '125px', height: '125px', position: 'relative', top: '-20px', right: '7.5px' }}/>
               </CardMedia>
               <CardContent sx={{ height: '160px' }}>
                 <Typography gutterBottom variant="h5" component="div">
@@ -91,6 +101,7 @@ function Home () {
           ))
           : null}
       </Grid>
+      {Object.keys(pokemon).length ? <Detail open={open} handleClose={handleClose} pokemon={pokemon}/> : null}
       {pokemons.length
         ? <Pagination currentPage={currentPage} setPage={setCurrentPage} totalPokemons={totalPokemons} firstPokemon={indexFirstPokemon} lastPokemon={indexLastPokemon}/>
         : null}
