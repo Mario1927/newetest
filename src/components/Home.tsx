@@ -91,7 +91,7 @@ function Home () {
               </CardContent>
             </CardActionArea>
             <CardActions sx={{ paddingY: '0' }}>
-              <Button size='small' color='primary'>
+              <Button size='small' color='primary' onClick={() => handleOpen(pokemon)>
                 MORE INFO
               </Button>
             </CardActions>
